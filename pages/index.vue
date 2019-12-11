@@ -1,72 +1,61 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        frontend
-      </h1>
-      <h2 class="subtitle">
-        My superior Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div id="index">
+    <div class='background'>
+      <StatSearch />
+      <PlayerStats />
+      <DiaryContainer />
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import StatSearch from '@/components/StatSearch'
+import PlayerStats from '@/components/PlayerStats'
+import DiaryContainer from '@/components/DiaryContainer'
 
 export default {
   components: {
-    Logo
+    StatSearch,
+    PlayerStats,
+    DiaryContainer
+  },
+  mounted(){
+    this.getDiaries()
+  },
+  methods: {
+    getDiaries(){
+      fetch(this.$store.state.BASE_URL + '/diaries')
+        .then(res => res.json())
+        .then(diaries => {
+          diaries
+            ? this.$store.commit('setDiaries', diaries)
+            : alert('failed to fetch requirements, please try again later')
+        })
+    }
   }
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+<style lang='scss'>
+  #index {
+    display: flex;
+    justify-content: center;
+    background: black;
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+    .background {
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      width: 60vw;
+      max-width: 700px;
+      min-width: 320px;
+      height: 100%;
+      min-height: 100vh;
+      background: url('https://runescape.com/img/rsp777/bg2.jpg');
+      background-size: 100% 50%;
+      background-repeat: repeat-y;
+      margin: 0;
+      padding: 0;
+    }
+  }
 </style>
