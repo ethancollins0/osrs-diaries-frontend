@@ -23,7 +23,7 @@
 <style lang="scss">
     .diary {
         height: max-content;
-        background: grey;
+        background: #9e5829;
         width: 80%;
         margin-bottom: 1rem;
         display: flex;

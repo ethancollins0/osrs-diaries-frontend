@@ -29,7 +29,8 @@ export const state = () => ({
         {name: 'hunter', value: 1},
       ],
       total: {name: 'total', value: 36},
-      combat: 3
+      combat: 3,
+      username: 'Bob',
 })
 
 export const mutations = {
@@ -44,5 +45,8 @@ export const mutations = {
     },
     setDiaries(state, diaries){
         state.diaries = diaries
+    },
+    setName(state, name){
+        state.username = name
     }
 }

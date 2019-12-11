@@ -10,6 +10,7 @@
 
 <script>
     import { mapMutations } from 'vuex'
+    import calcCombat from './ExportFunctions/CalcCombat'
 
     export default {
         computed: {
@@ -36,18 +37,23 @@
                 .then(result => {
                     this.loading = false
                     result 
-                        ? this.setStats(result)
+                        ? this.setStats(result, name)
                         : alert('name not found, check spelling and try again')
                 })
             },
-            setStats(stats){
+            setStats(stats, name){
                 this.$store.commit('setStats', stats)
+                this.$store.commit('setName', name)
                 let total = 0
                 stats.map(stat => {
                     total += +stat.value
                 })
                 console.log('here', total)
                 this.$store.commit('setTotal', total)
+                this.updateCombatLevel(stats)
+            },
+            updateCombatLevel(stats){
+                this.$store.commit('setCombat', calcCombat(stats))
             }
         },
         data(){

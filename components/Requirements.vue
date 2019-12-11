@@ -54,25 +54,26 @@
     .requirements {
         display: flex;
         flex-direction: row;
-        padding-bottom: 1rem;
-        
+        // padding-bottom: 1rem;
+
         section {
             width: 25%;
             display: flex;
             flex-direction: column;
             
-
-
             p {
                 width: 100%;
                 background: tan;
                 border-right: 1px solid black;
+                border-bottom: 1px solid black;
                 display: flex;
                 justify-content: center;
+                transition: .3s all;
             }
 
-            p:last-of-type {
-                border-right: 0px;
+            p:hover {
+                cursor: pointer;
+                background: rgb(200, 155, 96);
             }
 
             .diary-status {
@@ -82,17 +83,20 @@
                 border-right: 1px solid black;
             }
 
-            .diary-status:last-of-type {
-                border-right: 0px;
-            }
-
             .canDo {
                 background: green;
             }
         }
 
-        
+        section:last-of-type {
+            p {
+                border-right: 0px;
+            }
 
+            .diary-status {
+                border-right: 0px;
+            }
+        }
         
     }
 </style>
